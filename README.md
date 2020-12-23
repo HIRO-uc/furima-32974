@@ -19,18 +19,18 @@
 
 ## itemsテーブル
 
-| Column              | Type                       | Options                    | 
-| ------------------- | -------------------------- | -------------------------- | 
-| price               | integer                    | null: false                | 
-| name                | string                     | null: false                | 
-| image               | アクティブストレージで実装 | アクティブストレージで実装 | 
-| description         | text                       | null: false                | 
-| category_id         | integer                    | null: false                | 
-| condition_id        | integer                    | null: false                | 
-| shipping_expense_id | integer                    | null: false                | 
-| shipping_area_id    | integer                    | null: false                | 
-| shipping_day_id     | integer                    | null: false                | 
-| user                | references                 | foreign_key: true          | 
+| Column                 | Type                       | Options                    | 
+| ---------------------- | -------------------------- | -------------------------- | 
+| price                  | integer                    | null: false                | 
+| name                   | string                     | null: false                | 
+| image                  | アクティブストレージで実装 | アクティブストレージで実装 | 
+| description            | text                       | null: false                | 
+| category_id            | integer                    | null: false                | 
+| condition_id           | integer                    | null: false                | 
+| shipping_fee_status_id | integer                    | null: false                | 
+| shipping_prefecture_id | integer                    | null: false                | 
+| shipping_day_id        | integer                    | null: false                | 
+| user                   | references                 | foreign_key: true          | 
 
 ### Association
 - belongs_to :user
