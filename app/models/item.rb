@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_day
   has_one_attached :image
 
-  validates :image, :name, :description, presence: true
-  validates :category_id, :condition_id, :shipping_fee_status_id, :shipping_prefecture_id, :shipping_day_id, numericality: { other_than: 0 }
+  validates :image, :name, :description, :price, presence: true
+  validates :price, format: { with: /\A[0-9]+\z/, message: 'Harf-width number' }, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'Out of Setting range' }
+  validates :category_id, :condition_id, :shipping_fee_status_id, :shipping_prefecture_id, :shipping_day_id, numericality: { other_than: 0, message: 'Select' }
 end
