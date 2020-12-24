@@ -21,7 +21,7 @@
 
 | Column                 | Type                       | Options                    | 
 | ---------------------- | -------------------------- | -------------------------- | 
-| price                  | string                     | null: false                | 
+| price                  | integer                    | null: false                | 
 | name                   | string                     | null: false                | 
 | image                  | アクティブストレージで実装 | アクティブストレージで実装 | 
 | description            | text                       | null: false                | 
