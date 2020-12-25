@@ -21,11 +21,9 @@ class ItemsController < ApplicationController
   end
 
   def show
-    current_path_item
   end
 
   def destroy
-    current_path_item
     @item.destroy
     redirect_to root_path
   end
