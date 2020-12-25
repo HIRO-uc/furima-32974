@@ -58,6 +58,7 @@
 | house_number  | string  | null: false | 
 | building_name | string  | default: "" | 
 | tel           | string  | null: false | 
+| purchase | references | foreign_key: true |
 
 ### Association
 - belongs_to :purchase
