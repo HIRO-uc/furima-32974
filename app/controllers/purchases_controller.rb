@@ -1,14 +1,13 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
   before_action :move_to_index
+  before_action :current_path_item
 
   def index
-    @item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new(purchase_address_params)
     if @purchase_address.valid?
       pay_item
@@ -35,7 +34,11 @@ class PurchasesController < ApplicationController
   end
 
   def move_to_index
-    @item = Item.find(params[:item_id])
+    current_path_item
     redirect_to root_path if @item.user.id == current_user.id || @item.purchase
+  end
+
+  def current_path_item
+    @item = Item.find(params[:item_id])
   end
 end
