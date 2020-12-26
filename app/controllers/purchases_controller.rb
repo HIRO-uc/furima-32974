@@ -12,7 +12,7 @@ class PurchasesController < ApplicationController
     if @purchase_address.valid?
       pay_item
       @purchase_address.save
-      return redirect_to root_path
+      redirect_to root_path
     else
       render :index
     end
@@ -21,11 +21,12 @@ class PurchasesController < ApplicationController
   private
 
   def purchase_address_params
-    params.permit(:postal_code, :shipping_prefecture_id, :city, :house_number, :building_name, :tel, :token, :item_id).merge(user_id: current_user.id)
+    params.permit(:postal_code, :shipping_prefecture_id, :city, :house_number, :building_name, :tel, :token,
+                  :item_id).merge(user_id: current_user.id)
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: params[:token],
