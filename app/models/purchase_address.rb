@@ -9,7 +9,7 @@ class PurchaseAddress
   validates :shipping_prefecture_id, numericality: { other_than: 0, message: 'Select' }
   validates :city, :house_number,        presence: true
   with_options presence: true do
-    validates :tel,                        format: { with: /\A\d{10,11}\z/, message: 'Input only number' }
+    validates :tel,                        format: { with: /\A\d{10,11}\z/, message: 'Input only half-width number' }
   end
   
   def save
