@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_prefecture
   belongs_to :shipping_day
   has_one_attached :image
+  has_one :purchase
 
   validates :image, :name, :description, :price, presence: true
   validates :price, numericality: { with: /\A[0-9]+\z/, message: 'Harf-width number' }
