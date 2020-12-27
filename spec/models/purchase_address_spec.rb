@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe PurchaseAddress, type: :model do
   before do
+    @user = build(:user)
+    @item = build(:item)
     @purchase_address = build(:purchase_address)
   end
 
-  context '出品機能が正常に動作するとき' do
+  context '購入機能が正常に動作するとき' do
     it 'すべての値が正しく入力されていれば保存できること' do
       expect(@purchase_address).to be_valid
     end
@@ -15,7 +17,7 @@ RSpec.describe PurchaseAddress, type: :model do
     end
   end
 
-  context '出品機能が正常に動作しないとき' do
+  context '購入機能が正常に動作しないとき' do
     it 'tokenが空だと保存できないこと' do
       @purchase_address.token = nil
       @purchase_address.valid?
@@ -31,7 +33,7 @@ RSpec.describe PurchaseAddress, type: :model do
       @purchase_address.valid?
       expect(@purchase_address.errors.full_messages).to include('Postal code Input correctly')
     end
-    it 'postal_codeが全角数字だと登録できないこと' do
+    it 'postal_codeが全角数字だと保存できないこと' do
       @purchase_address.postal_code = '１２３−４５６７'
       @purchase_address.valid?
       expect(@purchase_address.errors.full_messages).to include('Postal code Input correctly')
@@ -56,15 +58,30 @@ RSpec.describe PurchaseAddress, type: :model do
       @purchase_address.valid?
       expect(@purchase_address.errors.full_messages).to include("Tel can't be blank")
     end
-    it 'telがハイフンを含んでいると登録できないこと' do
+    it 'telがハイフンを含んでいると保存できないこと' do
       @purchase_address.tel = '090-1234-5678'
       @purchase_address.valid?
       expect(@purchase_address.errors.full_messages).to include('Tel Input only half-width number')
     end
-    it 'telが全角数字だと登録できないこと' do
+    it 'telが全角数字だと保存できないこと' do
       @purchase_address.tel = '０９０１２３４５６７８'
       @purchase_address.valid?
       expect(@purchase_address.errors.full_messages).to include('Tel Input only half-width number')
+    end
+    it 'telが12桁以上だと保存できないこと' do
+      @purchase_address.tel = '090123456789'
+      @purchase_address.valid?
+      expect(@purchase_address.errors.full_messages).to include('Tel Input only half-width number')
+    end
+    it 'user_idが空だと保存できないこと' do
+      @purchase_address.user_id = nil
+      @purchase_address.valid?
+      expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+    end
+    it 'item_idが空だと保存できないこと' do
+      @purchase_address.item_id = nil
+      @purchase_address.valid?
+      expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
     end
   end
 end
