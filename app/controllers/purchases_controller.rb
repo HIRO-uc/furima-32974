@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user!
   before_action :current_path_item
   before_action :move_to_index
 
